@@ -118,7 +118,24 @@
 		</div>
 
 	</div>
-
+	<form>
+		<div class="form-group">
+			<label for="nome" class="control-label">Nome/Sobrenome</label>
+			<input type="text" class="form-control" id="nome" name="nome" placeholder="name@domain.com">
+		</div>
+		<div class="form-group">
+			<label for="email" class="control-label">E-mail</label>
+			<input type="email" class="form-control" id="email" name="email" placeholder="name@domain.com">
+		</div>
+		<div class="form-group"> 
+			<label for="interesses" class="control-label">Interesses</label>
+			<textarea class="form-control" id="email" name="interesses"></textarea>
+		</div>
+		
+		<div class="form-group">
+			<button id="submit-form" type="submit" class="btn btn-primary">Submit</button>
+		</div>	
+	</form>
 
 	<!--JS LIBRARIES-->
 
@@ -159,7 +176,20 @@ var columns = [{
 }];
 
 $(document).ready(function() {
+  	var $form = $('form'),
+    url = 'https://script.google.com/macros/s/AKfycbwzgT4P64ZVYqNfZ8J2TWC7ybuZle5xnbW5D3vYW99FNOrmW0Wb/exec'
 
+	$('#submit-form').on('click', function(e) {
+	  e.preventDefault();
+	  var jqxhr = $.ajax({
+	    url: url,
+	    method: "GET",
+	    dataType: "json",
+	    data: $form.serializeObject()
+	  }).success(
+	    // do something
+	  );
+	});
   function initializeTabletopObject() {
     Tabletop.init({
       key: key,
